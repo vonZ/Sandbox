@@ -8,8 +8,8 @@
 
 @import "vendor/bootstrap/_bootstrap.scss";
 
-$fa-font-path: "/bower_components/fontawesome/fonts/";
+$fa-font-path: "../../bower_components/fontawesome/fonts/";
 @import "../../bower_components/fontawesome/scss/font-awesome";
 
-@import "_components.scss"; 
+@import "_components.scss";
 
