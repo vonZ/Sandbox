@@ -34,9 +34,16 @@ app.factory('posts', ['$http', function($http){
 		posts: []
 	};
 
+	o.get = function(id) {
+    	console.log("get post");
+		return $http.get('/posts/' + id).then(function(res) {
+			return res.data; 
+		});
+	};
+
 	//Get all posts
 	o.getAll = function() {
-		return $http.get('/posts').success(function(data) {
+		return $http.get('/posts/').success(function(data) {
 			angular.copy(data, o.posts);
 		});
 	}
@@ -55,12 +62,6 @@ app.factory('posts', ['$http', function($http){
 			post.upvotes += 1;
 		});
 	}
-
-	o.get = function(id) {
-		return $http.get('/posts/' + id).then(function(res) {
-			return res.data; 
-		});
-	};
 
 	o.addComment = function(id, comment) {
 	  return $http.post('/posts/' + id + '/comments', comment);
