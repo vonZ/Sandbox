@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	 <title>Sandbox</title>
+   <title>Sandbox</title>
 
-	 <link rel="stylesheet" type="text/css" href="styles/build/main.min.css">
+   <link rel="stylesheet" type="text/css" href="/stylesheets/build/main.min.css">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,8 +25,6 @@
   </div>
 
   <script type="text/ng-template" id="/posts.html">
-
-
     <div class="page-header">
       <h3>
         <a ng-show="post.link" href="{{post.link}}">
@@ -60,6 +58,17 @@
   </script>
 
   <script type="text/ng-template" id="/home.html">
+   <form ng-submit="addPost()">
+      <div class="form-group">
+        <label for="exampleInputTitle">Title</label>
+        <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputLink">Link</label>
+        <input type="text" class="form-control" placeholder="Link" ng-model="title"></input>
+      </div>
+      <button type="submit" class="btn btn-default">Add post</button>
+    </form>
 
     <div ng-repeat="post in posts | orderBy: '-upvotes'" class="well">
 
@@ -75,26 +84,13 @@
         {{post.upvotes}} upvotes
       </p> 
       <span>
-        <a href="#/posts/{{post._id}}">Comments</a>
+        <a href="#/posts/{{$index}}">Comments</a>
       </span>
     </div>
-
-    <form ng-submit="addPost()">
-      <div class="form-group">
-        <label for="exampleInputTitle">Title</label>
-        <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputLink">Link</label>
-        <input type="text" class="form-control" placeholder="Link" ng-model="title"></input>
-      </div>
-      <button type="submit" class="btn btn-default">Add post</button>
-    </form>
-
   </script>
 
-	<script src="scripts/build/main.min.js"></script>
-	<script src="/javascripts/angularApp.js"></script>
+  <script src="/javascripts/build/main.min.js"></script>
+  <script src="/javascripts/angularApp.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 
   </body>

@@ -31,7 +31,7 @@ router.post('/posts', function(req, res, next) {
 });
 
 /* PARAM posts  */
-router.param('posts', function(req, res, next, id) {
+router.param('post', function(req, res, next, id) {
 	var query =  Post.findById(id);
 
 	query.exec(function (err, post){
@@ -43,11 +43,23 @@ router.param('posts', function(req, res, next, id) {
 	});
 });
 
-/* GET a single post  */
-router.get('/posts/:post', function(req, res) {
+// Preload comment objects on routes with ':comment'
+router.param('comment', function(req, res, next, id) {
+  var query = Comment.findById(id);
+
+  query.exec(function (err, comment){
+    if (err) { return next(err); }
+    if (!comment) { return next(new Error("can't find comment")); }
+
+    req.comment = comment;
+    return next();
+  });
+});
+
+/* Return a single post  */
+router.get('/posts/:post', function(req, res, next) {
 	req.post.populate('comments', function(err, post) {
-		if (err) { return next(err); }
-		res.json(req.post);
+		res.json(post);
 	});
 });
 
